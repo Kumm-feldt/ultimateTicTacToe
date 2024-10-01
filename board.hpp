@@ -10,10 +10,11 @@ namespace tictactoe {
 
 	enum class BoardStatus {
 		Covered, 
-		Won, 
 		Uncovered,
+		Won,
 		Tie
 	};
+
 
 	struct Location {
 		int row;
@@ -40,6 +41,8 @@ namespace tictactoe {
 		};
 
 		BoardStatus status;
+		BoardStatus scoreStatus;
+
 		void reset();
 		Cell getCell(int row, int column);
 		Board();

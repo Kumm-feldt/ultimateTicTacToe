@@ -56,9 +56,9 @@ namespace tictactoe {
 
 	void Board::setLabel(int row, int column, Label label) {
 
-		if (inBounds(row, column) && canvas[row][column].status == Status::Uncovered) {
+		if (inBounds(row, column)) {
 			canvas[row][column].label = label;
-
+			canvas[row][column].status = Status::Covered;
 		}
 		
 	}

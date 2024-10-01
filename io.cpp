@@ -1,4 +1,4 @@
-
+﻿
 #include <vector>
 #include<cctype>
 #include <string>
@@ -11,6 +11,69 @@
 using std::vector;
 namespace tictactoe {
 
+	// cout
+
+	void printRow(const Board& board, int row) {
+		Graphics graphics;
+		for (int col = 0; col < 3; ++col) {
+			printCells(board, row, col);
+			
+			if (col < 2) {
+				std::cout <<" "<< graphics.line<<" ";
+			}
+		}
+	}
+
+	void printBoardRow(const std::array<std::array<Board, 3>, 3>& boards, int boardRow, int cellRow) {
+		Graphics graphics;
+		for (int boardCol = 0; boardCol < 3; ++boardCol) {
+			printRow(boards[boardRow][boardCol], cellRow);
+			if (boardCol < 2) {
+				std::cout << " "<<graphics.fullBlock<<" ";
+			}
+		}
+		std::cout << std::endl;
+	}
+
+	void printBoards(const std::array<std::array<Board, 3>, 3>& boards) {
+		Graphics graphics;
+		for (int boardRow = 0; boardRow < 3; ++boardRow) {
+			for (int cellRow = 0; cellRow < 3; ++cellRow) {
+				printBoardRow(boards, boardRow, cellRow);
+			}
+			if (boardRow < 2) {
+				for (size_t i = 0; i < 3; i++)
+				{
+					if (i == 1) {
+						std::cout << graphics.horizontal;
+
+					}
+					for (size_t j = 0; j < 10; j++)
+					{
+						
+						std::cout << graphics.horizontal;
+					}
+					if (i < 2) {
+						std::cout << graphics.fullBlock;
+
+					}
+				}
+				std::cout << "\n";
+			}
+		}
+	}
+
+
+
+	void status(Label gameStatus) {
+		if (gameStatus == Label::O) {
+			std::cout << "O won\n";
+			
+		}
+		else if (gameStatus == Label::X) {
+			std::cout << "X won \n";
+		}
+	}
 
 	bool incorrectMark(Board board, int row, int column) {
 		Cell cell = board.getCell(row, column);
@@ -25,7 +88,7 @@ namespace tictactoe {
 			if (cell.label == Label::X) {
 				std::cout << "X";
 			}
-			else {
+			else if(cell.label == Label::O){
 				std::cout << "O";
 
 			}
@@ -45,7 +108,11 @@ namespace tictactoe {
 			{
 
 				printCells(board, i, j);
-				if (j != 2) std::cout << " | ";
+				if (j != 2) {
+					std::cout << " | ";
+
+				}
+				
 
 			}
 			std::cout << std::endl;
@@ -59,8 +126,6 @@ namespace tictactoe {
 
 		}
 	}
-
-	// printBIG board
 
 
 
@@ -92,10 +157,8 @@ namespace tictactoe {
 		Operation op = Operation::Play;
 		int column;
 		int row;
-		//if (command.InitialMove) { // this will be the very first move. if the user is the one moving
-			//std::cin >> column >> row;
-		//}
-		std::cin >> column >> row; // get the Loc of the min board
+	
+		std::cin >> row >> column; // get the Loc of the min board
 
 		if (column == -1 && row == -1) {
 			op = Operation::Quit;
