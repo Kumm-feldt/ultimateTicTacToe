@@ -30,11 +30,21 @@ namespace tictactoe {
 	struct Cell {
 		Label label;
 		Status status;
+
+		// Overload the != operator
+		bool operator!=(const Cell& other) const {
+			// Compare both the label and status of two cells
+			return label != other.label || status != other.status;
+		}
+	
 	};
 
 
 	class Board {
 		std::array<std::array<Cell, 3>, 3> canvas;
+
+
+
 	public:
 		std::array<std::array<Cell, 3>, 3>copyCanvas() {
 			return canvas;
